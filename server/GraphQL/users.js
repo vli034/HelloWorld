@@ -29,8 +29,6 @@ resolvers = {
                 }             
             }).then(data => {
                 console.log('USERS ----', data[0])
-                // console.log('USER WITHOUT INDEXIING', data)
-               
                 return data[0]
             })
           

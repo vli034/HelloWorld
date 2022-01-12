@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import LoginPage from '../components/LoginPage'
 import HelloWorld from '../components/HelloWorld'
+/* eslint-disable */
 
 Vue.use(Router)
 

@@ -5,6 +5,7 @@ import App from './App'
 import router from './router'
 import ApolloClient from 'apollo-boost'
 import VueApollo from 'vue-apollo'
+import store from './store/store'
 
 Vue.config.productionTip = false
 
@@ -25,6 +26,7 @@ const apolloProvider = new VueApollo({
 new Vue({
   el: '#app',
   router,
+  store,
   apolloProvider,
   components: { App },
   template: '<App/>'

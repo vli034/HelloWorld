@@ -7,7 +7,7 @@
         <form class="form" @submit.prevent="loginUser">
             <div>
                 <label for="username">Username</label>
-                <input type="text" v-model="input.username"/>
+                <input :value="userName" @input="getUsername"/>
                 <p v-if="!input.username" class="error-message">{{validation.error}}</p>
             </div>
             <div>
@@ -28,6 +28,7 @@
 /* eslint-disable */
 import HelloWorld from './HelloWorld.vue'
 import gql from 'graphql-tag'
+import { mapState } from 'vuex'
 
 
 const GET_ALL_USERS = gql`
@@ -110,6 +111,11 @@ export default {
           },
       }
   },
+      computed: {
+        ...mapState({
+            userName: state => state.userName
+        })
+    },
   methods: {
       loginUser() {
           if (this.input.username === '' || this.input.password === '') {
@@ -117,9 +123,15 @@ export default {
           } else {
               // running query on click
                this.$apollo.queries.user.skip = false        
-          }   
-      }      
+          }  
+      },
+      getUsername(e){
+          this.$store.commit('getUsername',e.target.value) 
+          console.log(e.target.value)
+          console.log(this.$store.userName)
+      }     
   }
+
 }
 </script>
 

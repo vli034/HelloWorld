@@ -113,7 +113,7 @@ export default {
   methods: {
       loginUser() {
           if (this.input.username === '' || this.input.password === '') {
-              this.error = "This field can not be empty."
+              this.validation.topErrorMessage = "This field can not be empty."
           } else {
               // running query on click
                this.$apollo.queries.user.skip = false        

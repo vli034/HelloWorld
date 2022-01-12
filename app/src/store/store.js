@@ -3,22 +3,24 @@ import Vuex from 'vuex'
 
 /* eslint-disable */
 Vue.use(Vuex)
-
-export default new Vuex.Store({
+const store = new Vuex.Store({
     state: {
       count: 0,
-      userName: '',
-      password: ''
+      username: '',
+      password: '', 
+
     },
     mutations: {
-      increment (state) {
-        state.count++
+  
+      getUsername(state, uname){
+        state.username = uname
+        console.log('store.js username state', state.username)
       },
-
-      getUsername (state, name) {
-          state.userName = name
-          return state.userName
-        
+      getPassword(state, uPass){
+        state.password = uPass
+        console.log('store.js password state', state.password)
       }
     }
   })
+
+  export default store

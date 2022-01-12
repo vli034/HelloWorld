@@ -7,12 +7,12 @@
         <form class="form" @submit.prevent="loginUser">
             <div>
                 <label for="username">Username</label>
-                <input :value="userName" @input="getUsername"/>
-                <p v-if="!input.username" class="error-message">{{validation.error}}</p>
+                <input type="text" :value="username" @input="getUsername"/>
+                <p v-if="!input.userName" class="error-message">{{validation.error}}</p>
             </div>
             <div>
                 <label class="label-des" for="password">Password</label>
-                <input type="password" v-model="input.password"/>
+                <input type="password" :value="password" @input="getPassword"/>
                 <p v-if="!input.password" class="error-message">{{validation.error}}</p>
             </div>
             <div>
@@ -29,6 +29,7 @@
 import HelloWorld from './HelloWorld.vue'
 import gql from 'graphql-tag'
 import { mapState } from 'vuex'
+
 
 
 const GET_ALL_USERS = gql`
@@ -111,25 +112,23 @@ export default {
           },
       }
   },
-      computed: {
-        ...mapState({
-            userName: state => state.userName
-        })
-    },
+  computed: {
+      ...mapState({
+          username: state => state.username,
+          password: state => state.password
+      })
+  },
   methods: {
-      loginUser() {
-          if (this.input.username === '' || this.input.password === '') {
-              this.error = "This field can not be empty."
-          } else {
-              // running query on click
-               this.$apollo.queries.user.skip = false        
-          }  
-      },
-      getUsername(e){
-          this.$store.commit('getUsername',e.target.value) 
-          console.log(e.target.value)
-          console.log(this.$store.userName)
-      }     
+    getUsername(e) {
+        this.$store.commit('getUsername', e.target.value)
+        
+    },
+    getPassword(e){
+        this.$store.commit('getPassword', e.target.value)
+    },
+    loginUser(){
+        console.log('login button presed', this.$store.state.username, this.$store.state.password)
+    }
   }
 
 }
